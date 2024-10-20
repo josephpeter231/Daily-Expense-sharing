@@ -1,24 +1,24 @@
-/* Login.css */
+
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Full viewport height */
-    background-color: #f8f9fa; /* Light background color */
+    height: 100vh; 
+    background-color: #f8f9fa;
   }
   
   .login-card {
-    width: 400px; /* Card width */
-    padding: 20px; /* Card padding */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
-    border-radius: 8px; /* Rounded corners */
+    width: 400px; 
+    padding: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
   }
   
   h1 {
-    font-weight: 700; /* Bold heading */
+    font-weight: 700;
   }
   
   button {
-    font-weight: 600; /* Bold button text */
+    font-weight: 600; 
   }
   

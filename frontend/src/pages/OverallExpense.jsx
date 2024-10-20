@@ -5,7 +5,7 @@ import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { Dropdown } from 'react-bootstrap'; // Import Dropdown from react-bootstrap
+import { Dropdown } from 'react-bootstrap'; 
 
 const OverallUserExpenses = () => {
   const [expenses, setExpenses] = useState([]);
@@ -13,7 +13,7 @@ const OverallUserExpenses = () => {
   const [userExpenses, setUserExpenses] = useState({});
   const [grandTotal, setGrandTotal] = useState(0);
 
-  // Fetch all users and create a map
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -22,7 +22,7 @@ const OverallUserExpenses = () => {
 
         const map = {};
         users.forEach(user => {
-          map[user._id] = user.name; // Map userId to user name
+          map[user._id] = user.name; 
         });
         setUserMap(map);
       } catch (error) {
@@ -33,7 +33,7 @@ const OverallUserExpenses = () => {
     fetchUsers();
   }, []);
 
-  // Fetch all expenses
+
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
@@ -74,7 +74,7 @@ const OverallUserExpenses = () => {
     fetchExpenses();
   }, []);
 
-  // Download as Excel
+
   const downloadExcel = () => {
     const wb = XLSX.utils.book_new();
 
@@ -97,7 +97,7 @@ const OverallUserExpenses = () => {
     saveAs(blob, 'Overall_Expenses.xlsx');
   };
 
-  // Download as PDF
+
   const downloadPDF = () => {
     const doc = new jsPDF();
     const tableData = Object.keys(userExpenses).flatMap(userId =>

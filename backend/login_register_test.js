@@ -1,7 +1,7 @@
 const request = require('supertest');
-const app = require('./server'); // Import the app instance
+const app = require('./server'); 
 const mongoose = require('mongoose');
-const User = require('./models/User'); // Import your User model
+const User = require('./models/User'); 
 
 beforeAll(async () => {
   await mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,7 +13,7 @@ afterAll(async () => {
 
 describe('User Authentication Routes', () => {
   beforeEach(async () => {
-    await User.deleteMany({}); // Clean up user data before each test
+    await User.deleteMany({}); 
   });
 
   it('should register a new user', async () => {
