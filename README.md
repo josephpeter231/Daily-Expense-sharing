@@ -17,24 +17,14 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 - Expenses can be split using three methods:
   1. **Equal**: Split equally among all participants.
   2. **Exact**: Specify the exact amount each participant owes.
-  3. **Percentage**: Specify the percentage each participant owes. (Ensure percentages add up to 100%).
+  3. **Percentage**: Specify the percentage each participant owes.
 
-### Expense Calculation Examples
-1. **Equal**:
-   - **Scenario**: You go out with 3 friends. The total bill is 3000. Each friend owes 1000.
-   
-2. **Exact**:
-   - **Scenario**: You go shopping with 2 friends and pay 4299. Friend 1 owes 799, Friend 2 owes 2000, and you owe 1500.
-   
-3. **Percentage**:
-   - **Scenario**: You go to a party with 2 friends and one of your cousins. You owe 50%, Friend 1 owes 25%, and Friend 2 owes 25%.
 
 ### Balance Sheet
 - Show individual expenses.
 - Show overall expenses for all users.
 - Provide a feature to download the balance sheet.
 
-## Deliverables
 
 ### Backend Service
 - Design the backend service to handle user and expense management.
@@ -44,29 +34,19 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 #### User Endpoints
 - **Create User**: 
   - `POST /users`
-  - Request Body:
-    ```json
-    {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "mobile": "1234567890"
-    }
-    ```
   
-- **Retrieve User Details**: 
-  - `GET /users/:id`
+- **Get Single User**: 
+  - `GET /singleuser/:id`
+
+- **Login User**: 
+  - `POST /login`
+
+- **Get All Users**: 
+  - `GET /users`
 
 #### Expense Endpoints
 - **Add Expense**: 
   - `POST /expenses`
-  - Request Body:
-    ```json
-    {
-      "amount": 3000,
-      "splitMethod": "equal",
-      "participants": ["user1Id", "user2Id", "user3Id"]
-    }
-    ```
 
 - **Retrieve Individual User Expenses**: 
   - `GET /expenses/user/:id`
@@ -80,11 +60,14 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 ## Data Validation
 - Validate user inputs to ensure correctness.
 - Ensure percentages in the percentage split method add up to 100%.
+- During exact split greater than the original amount cannot be done.
 
 ## Documentation
 ### Setup and Installation Instructions
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/daily-expenses-sharing-app.git
-   cd daily-expenses-sharing-app
+   git clone https://github.com/josephpeter231/Daily-Expense-sharing/
+   cd backend
+   npm install 
+   nodemon server
