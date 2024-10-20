@@ -26,53 +26,35 @@ const AddExpense = () => {
   }, [createdBy]);
 
   const handleAddExpense = () => {
-    let calculatedParticipants = [];
-    const totalExactSplits = Object.values(exactSplits).reduce((a, b) => a + Number(b), 0);
-    const totalPercentSplits = Object.values(percentSplits).reduce((a, b) => a + Number(b), 0);
-
-    if (splitMethod === 'Equal') {
-      const equalShare = (amount / (participants.length + 1)).toFixed(2);
-      calculatedParticipants = [
-        { participantId: createdBy, amountOwed: equalShare },
-        ...participants.map(p => ({ participantId: p, amountOwed: equalShare }))
-      ];
-    } else if (splitMethod === 'Exact') {
-      if (totalExactSplits > amount) {
-        alert('The total of exact amounts cannot exceed the total expense amount.');
+    if (splitMethod === 'Exact') {
+      const totalExact = Object.values(exactSplits).reduce((a, b) => a + parseFloat(b || 0), 0);
+      if (totalExact > parseFloat(amount)) {
+        alert("Total exact splits cannot exceed the total expense amount.");
         return;
       }
-      const remainingAmount = amount - totalExactSplits;
-      calculatedParticipants = [
-        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) },
-        ...participants.map(p => ({ participantId: p, amountOwed: exactSplits[p] || 0 }))
-      ];
     } else if (splitMethod === 'Percentage') {
-      if (totalPercentSplits > 100) {
-        alert('The total of percentages cannot exceed 100%.');
+      const totalPercent = Object.values(percentSplits).reduce((a, b) => a + parseFloat(b || 0), 0);
+      if (totalPercent > 100) {
+        alert("Total percentages cannot exceed 100%.");
         return;
       }
-      const remainingAmount = amount - (amount * (totalPercentSplits / 100));
-      calculatedParticipants = [
-        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) },
-        ...participants.map(p => {
-          const percentage = percentSplits[p] || 0;
-          return { participantId: p, amountOwed: (amount * (percentage / 100)).toFixed(2) };
-        })
-      ];
     }
-
+  
     const expenseData = {
       description,
       amount: parseFloat(amount),
       splitMethod,
-      participants: calculatedParticipants,
+      participants,
+      exactSplits,
+      percentSplits,
       createdBy,
     };
-
+  
     axios.post('http://localhost:5000/expenses', expenseData)
       .then(() => alert('Expense added successfully'))
       .catch((err) => alert('Error adding expense', err));
   };
+  
 
   const handleSplitChange = (e) => {
     setSplitMethod(e.target.value);
