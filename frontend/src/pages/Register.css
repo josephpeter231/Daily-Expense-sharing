@@ -1,0 +1,23 @@
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa; /* Light background color */
+}
+
+.register-card {
+    width: 400px; /* Set a fixed width for the card */
+    padding: 2rem; /* Add padding for spacing */
+    border-radius: 15px; /* Round corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: white; /* Card background color */
+}
+
+h1 {
+    color: #007bff; /* Bootstrap primary color */
+}
+
+.btn {
+    font-weight: bold;
+}
