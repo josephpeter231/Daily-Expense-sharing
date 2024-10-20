@@ -57,7 +57,7 @@ Design and implement a backend for a daily-expenses sharing application. This ap
   - `GET /expenses/balance-sheet`
 
 ## Data Validation
- -[x] Validate user inputs to ensure correctness.
+- [x] Validate user inputs to ensure correctness.
 - Ensure percentages in the percentage split method add up to 100%.
 - During exact split greater than the original amount cannot be done.
 
