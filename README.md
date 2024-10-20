@@ -58,8 +58,11 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 
 ## Data Validation
 - [x] Validate user inputs to ensure correctness.
-- Ensure percentages in the percentage split method add up to 100%.
-- During exact split greater than the original amount cannot be done.
+- [x] Ensure percentages in the percentage split method add up to 100%.
+- [x] During exact split greater than the original amount cannot be done.
+- [x] Implemented user authentication and authorization.
+- [x] Included error handling and input validation.
+- [x] Added unit tests.
 
 ## Documentation
 ### Setup and Installation Instructions
@@ -80,3 +83,30 @@ Design and implement a backend for a daily-expenses sharing application. This ap
    npm install 
    npm run dev 
 
+2. Go to browswer and click the link
+ - [http://localhost:5173/](http://localhost:5173/)
+
+## Unit test
+1. To run the unit test.
+  - ```bash
+     cd backend
+     npm test
+    
+  - Test done for Expense Calculation Routes.
+    √ should create an expense with equal splits.                                                           
+    √ should not allow exact splits to exceed the total amount.                                         
+    √ should create an expense with percentage splits.                                                 
+    √ should not allow percentage splits to exceed 100%.    
+
+    ![Expense test](screenshots/expense_route_test.png)
+
+
+  - Test done for User Authentication Routes
+    √ should register a new user.                                                                          
+    √ should not register a user with an existing email.                                                   
+    √ should log in a user.                                                                               
+    √ should not log in with incorrect credentials.                                                       
+    √ should not log in a non-existent user.
+
+    ![User_Authentication_Test](screenshots/Login%20Route%20Test.png)
+   
