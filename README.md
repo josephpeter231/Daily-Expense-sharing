@@ -26,6 +26,7 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 - Show overall expenses for all users.
 - Users can download the balance sheet in excel or pdf.
 
+## 
 
 ### API Endpoints
 
@@ -56,7 +57,7 @@ Design and implement a backend for a daily-expenses sharing application. This ap
   - `GET /expenses/balance-sheet`
 
 ## Data Validation
-- Validate user inputs to ensure correctness.
+ -[x] Validate user inputs to ensure correctness.
 - Ensure percentages in the percentage split method add up to 100%.
 - During exact split greater than the original amount cannot be done.
 
@@ -72,10 +73,10 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 2. Make sure it displays `Server is running on port 5000`
    (or) run `nodemon server`.
 
-## To run the frontend 
+### To run the frontend 
 
 1. ```bash
    cd frontend
    npm install 
    npm run dev 
-##
+
