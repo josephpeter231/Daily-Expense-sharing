@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
-import './Register.css'; // Import custom CSS for additional styling
+import './Register.css'; 
 
 const Register = () => {
   const [name, setName] = useState('');

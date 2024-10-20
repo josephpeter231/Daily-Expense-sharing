@@ -82,6 +82,12 @@ const IndividualExpenses = () => {
         doc.save('Individual_Expenses.pdf');
     };
 
+    // Calculate total expense for the current user
+    const totalExpense = expenses.reduce((total, expense) => {
+        const userExpense = expense.participants.find(participant => participant.participantId === userId)?.amountOwed || 0;
+        return total + userExpense;
+    }, 0);
+
     return (
         <div className="container mt-5">
             <h2 className="mb-4 text-center">Your Expenses</h2>
@@ -136,6 +142,13 @@ const IndividualExpenses = () => {
                         </tr>
                     ))}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colSpan="3">Total</th>
+                        <th>{totalExpense} Rs</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     );
