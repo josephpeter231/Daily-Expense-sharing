@@ -11,6 +11,7 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 
 ### User Management
 - Each user should have an email, name, and mobile number.
+- Registeration and Login can be done.
 
 ### Expense Management
 - Users can add expenses.
@@ -23,11 +24,8 @@ Design and implement a backend for a daily-expenses sharing application. This ap
 ### Balance Sheet
 - Show individual expenses.
 - Show overall expenses for all users.
-- Provide a feature to download the balance sheet.
+- Users can download the balance sheet in excel or pdf.
 
-
-### Backend Service
-- Design the backend service to handle user and expense management.
 
 ### API Endpoints
 
@@ -71,3 +69,12 @@ Design and implement a backend for a daily-expenses sharing application. This ap
    cd backend
    npm install 
    nodemon server
+2. Make sure it displays `Server is running on port 5000`
+   (or) run `nodemon server`.
+
+## To run the frontend 
+
+1. ```bash
+   cd frontend
+   npm install 
+   npm run dev 
