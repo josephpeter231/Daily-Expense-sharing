@@ -58,7 +58,7 @@ This application allows users to add expenses and split them based on three diff
 
 ## Data Validation
 - [x] Validate user inputs to ensure correctness.
-- [x] Ensure percentages in the percentage split method add up to 100%.
+- [x] Percentages in the percentage split method add up to 100%.
 - [x] During exact split greater than the original amount cannot be done.
 - [x] Implemented user authentication and authorization.
 - [x] Included error handling and input validation.
