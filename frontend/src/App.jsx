@@ -5,7 +5,7 @@ import Login from './pages/Login.jsx';
 import IndividualExpenses from './pages/IndividualExpense.jsx';
 import OverallExpenses from './pages/OverallExpense.jsx';
 import { useState } from 'react';
-
+import AppNavbar from './pages/Navbar.jsx';
 function App() {
   const [authToken, setAuthToken] = useState(null);
 
@@ -13,6 +13,7 @@ function App() {
 
   return (
     <Router>
+      <AppNavbar />
       <Routes>
         <Route path="/" element={<Login setAuthToken={setAuthToken} />} />
         <Route path="/register" element={<Register />} />

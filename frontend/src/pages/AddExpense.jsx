@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './AddExpense.css'; 
 
 const AddExpense = () => {
   const [description, setDescription] = useState('');
@@ -31,32 +33,30 @@ const AddExpense = () => {
     if (splitMethod === 'Equal') {
       const equalShare = (amount / (participants.length + 1)).toFixed(2);
       calculatedParticipants = [
-        { participantId: createdBy, amountOwed: equalShare }, // Creator's share
-        ...participants.map(p => ({ participantId: p, amountOwed: equalShare })) // Participants' shares
+        { participantId: createdBy, amountOwed: equalShare },
+        ...participants.map(p => ({ participantId: p, amountOwed: equalShare }))
       ];
     } else if (splitMethod === 'Exact') {
       if (totalExactSplits > amount) {
         alert('The total of exact amounts cannot exceed the total expense amount.');
         return;
       }
-
-      const remainingAmount = amount - totalExactSplits; // Remaining amount for the creator
+      const remainingAmount = amount - totalExactSplits;
       calculatedParticipants = [
-        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) }, // Creator's remaining share
-        ...participants.map(p => ({ participantId: p, amountOwed: exactSplits[p] || 0 })) // Participants' shares
+        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) },
+        ...participants.map(p => ({ participantId: p, amountOwed: exactSplits[p] || 0 }))
       ];
     } else if (splitMethod === 'Percentage') {
       if (totalPercentSplits > 100) {
         alert('The total of percentages cannot exceed 100%.');
         return;
       }
-
-      const remainingAmount = amount - (amount * (totalPercentSplits / 100)); // Remaining amount for creator
+      const remainingAmount = amount - (amount * (totalPercentSplits / 100));
       calculatedParticipants = [
-        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) }, // Creator's remaining share
+        { participantId: createdBy, amountOwed: remainingAmount.toFixed(2) },
         ...participants.map(p => {
           const percentage = percentSplits[p] || 0;
-          return { participantId: p, amountOwed: (amount * (percentage / 100)).toFixed(2) }; // Participants' shares
+          return { participantId: p, amountOwed: (amount * (percentage / 100)).toFixed(2) };
         })
       ];
     }
@@ -69,7 +69,6 @@ const AddExpense = () => {
       createdBy,
     };
 
-   
     axios.post('http://localhost:5000/expenses', expenseData)
       .then(() => alert('Expense added successfully'))
       .catch((err) => alert('Error adding expense', err));
@@ -86,37 +85,59 @@ const AddExpense = () => {
     if (type === 'Exact') {
       setExactSplits(prev => ({ ...prev, [userId]: value }));
     } else {
-      setPercentSplits(prev => ({ ...prev, [userId]: parseFloat(value) })); 
+      setPercentSplits(prev => ({ ...prev, [userId]: parseFloat(value) }));
     }
   };
 
-  const handleParticipantsChange = (e) => {
-    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
-    setParticipants(selectedOptions);
+  const handleParticipantsChange = (userId) => {
+    setParticipants(prev => {
+      if (prev.includes(userId)) {
+        return prev.filter(id => id !== userId);
+      }
+      return [...prev, userId];
+    });
   };
 
   return (
-    <div>
-      <h1>Add Expense</h1>
-      <input type="text" placeholder="Description" onChange={(e) => setDescription(e.target.value)} />
-      <input type="number" placeholder="Amount" onChange={(e) => setAmount(e.target.value)} />
+    <div className="add-expense-container">
+      <h1 className="text-center">Add Expense</h1>
+      <input 
+        type="text" 
+        className="form-control mb-3" 
+        placeholder="Description" 
+        onChange={(e) => setDescription(e.target.value)} 
+      />
+      <input 
+        type="number" 
+        className="form-control mb-3" 
+        placeholder="Amount" 
+        onChange={(e) => setAmount(e.target.value)} 
+      />
       
-      <select onChange={handleSplitChange}>
+      <select className="form-select mb-3" onChange={handleSplitChange}>
         <option value="Equal">Equal</option>
         <option value="Exact">Exact</option>
         <option value="Percentage">Percentage</option>
       </select>
 
       <div>
-        <h3>Select Participants:</h3>
-        <select multiple onChange={handleParticipantsChange}>
+        <h3>Choose Users to share:</h3>
+        <div className="participants-list">
           {allUsers.map(user => (
-            <option key={user._id} value={user._id}>{user.name}</option>
+            <div key={user._id} className="participant-item">
+              <input 
+                type="checkbox" 
+                id={user._id} 
+                checked={participants.includes(user._id)} 
+                onChange={() => handleParticipantsChange(user._id)} 
+              />
+              <label htmlFor={user._id}>{user.name}</label>
+            </div>
           ))}
-        </select>
+        </div>
       </div>
 
-      <button onClick={handleAddExpense}>Add Expense</button>
+      <button className="btn btn-primary" onClick={handleAddExpense}>Add Expense</button>
 
       <Modal show={modalShow} onHide={() => setModalShow(false)}>
         <Modal.Header closeButton>
@@ -126,12 +147,13 @@ const AddExpense = () => {
           {participants.map(participantId => {
             const participant = allUsers.find(user => user._id === participantId);
             return (
-              <div key={participantId}>
+              <div key={participantId} className="mb-2">
                 <label>{participant?.name}</label>
                 <input
                   type="number"
-                  step="0.01" // Allow decimal input
+                  step="0.01"
                   placeholder={splitMethod === 'Exact' ? 'Enter amount' : 'Enter percentage'}
+                  className="form-control"
                   onChange={(e) => handleSplitDataChange(participantId, e.target.value, splitMethod)}
                 />
               </div>

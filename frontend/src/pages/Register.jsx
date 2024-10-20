@@ -12,10 +12,13 @@ const Register = () => {
 
   const handleRegister = () => {
     axios.post('http://localhost:5000/register', { name, email, mobile, password })
-      .then(() => alert('User registered successfully'))
+      .then(() => {
+        alert('User registered successfully');
+        window.location.href = '/'; 
+      })
       .catch(() => alert('Error registering user'));
   };
-
+  
   return (
     <div className="register-container">
       <div className="card register-card">
@@ -55,7 +58,7 @@ const Register = () => {
         <div className="text-center mt-3">
           <p>
             Already have an account? 
-            <Link to="/login" className="ml-1">Log in</Link>
+            <Link to="/" className="ml-1">Log in</Link>
           </p>
         </div>
       </div>
